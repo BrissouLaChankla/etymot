@@ -26,7 +26,6 @@ export default {
             wordInfos:{}
         }
     },
-    
     mounted() {
         let word = this.word.toUpperCase();
         let arrayWord = Array.from(word);
