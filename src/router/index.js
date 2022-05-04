@@ -1,11 +1,23 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
+import DailyWord from '../views/DailyWord.vue'
+import RandomWord from '../views/RandomWord.vue'
 
 const routes = [
   {
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path:'/dailyword-game',
+    name: 'DailyWord',
+    component: DailyWord
+  },
+  {
+    path:'/randomword-game',
+    name: 'RandomWord',
+    component: RandomWord
   },
   {
     path: '/about',
