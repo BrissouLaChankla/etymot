@@ -4,7 +4,7 @@
       </h1>
     <tr v-for="i in 6" :key="i">
         <td v-for="j in wordinfos.size" :key="j">
-            <!-- Write first letter of the word at the top left of the table -->
+            <!-- Write first letter of the word at the top left of the table ff-->
               {{(i == 1 && j == 1) ? wordinfos.firstLetter : "."}} 
 
         </td>
