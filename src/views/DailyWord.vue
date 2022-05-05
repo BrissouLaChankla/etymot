@@ -4,7 +4,7 @@
             <h1 class="text-white">Partie letsgoo</h1>
             <h2 class="text-white">{{ word }}</h2>
             <ArrayGame :wordinfos="this.wordInfos" />
-            <KeyBoard />
+            
       </div>
   </div>
 </template>
@@ -12,17 +12,15 @@
 <script>
 // @ is an alias to /src
 import ArrayGame from '@/components/ArrayGame.vue';
-import KeyBoard from '@/components/Keyboard.vue';
 
 export default {
     components: {
-        ArrayGame,
-        KeyBoard
+        ArrayGame
     },
     name: "DailyWord",
     data() {
         return {
-            word: "Francky",
+            word: "Remisterio",
             wordInfos:{}
         }
     },
