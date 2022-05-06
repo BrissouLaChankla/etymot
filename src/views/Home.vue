@@ -40,7 +40,7 @@ export default {
 
 <style>
 .home {
-  height: 100vh;
+  min-height: 100vh;
   background-image: linear-gradient(
     to bottom,
     #0a4160,

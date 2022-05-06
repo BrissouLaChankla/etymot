@@ -1,6 +1,6 @@
 <template>
-  <table>
-    <tr v-for="i in 6" :key="i" :data-line="i">
+  <table class="m-auto">
+    <tr v-for="i in this.maxtry" :key="i" :data-line="i">
       <td v-for="j in wordinfos.size" :key="j">
         <!-- Write first letter of the word at the top left of the table ff-->
         {{ i == nboftry && j == 1 ? wordinfos.firstLetter : "." }}
@@ -24,21 +24,25 @@ export default {
       currentword: [],
       wordWithHint: [],
       nboftry: 1,
+      maxtry: 6,
     };
   },
   methods: {
     editWordArray(letter) {
+      let index = this.currentword.indexOf(".");
       switch (letter) {
         case "BACKSPACE":
-          this.removeLetterFromArray();
+          console.log(index);
+          if (index > 1 || index == -1) {
+            this.removeLetterFromArray();
+          }
           break;
         case "DONE":
-            let index = this.currentword.indexOf(".");
-            if (index !== -1) {
-              alert("mot incomplet")
-            } else {
-              this.tryGuessing();
-            }
+          if (index !== -1) {
+            alert("mot incomplet");
+          } else {
+            this.tryGuessing();
+          }
           break;
         default:
           this.addLetterToArray(letter);
@@ -54,14 +58,13 @@ export default {
       }
 
       this.editVisuallyTable();
-      console.log(this.currentword.length);
     },
 
     removeLetterFromArray() {
       // Find first "." on the current word array and replace by the pressed letter
       let index = this.currentword.indexOf(".");
       if (index !== -1) {
-        // Find the positizon of occurence and replace
+        // Find the position of occurence and replace
         this.currentword[index - 1] = ".";
       } else {
         this.currentword.pop();
@@ -71,8 +74,17 @@ export default {
     },
 
     tryGuessing() {
-      this.nboftry++;
-      this.currentword;
+      // check si partie gagnée
+      if (this.currentword.join("") == this.wordinfos.word) {
+        alert("Bravo, tu as trouvé le mot !");
+      } else {
+        // Check si partie finie
+        if (this.nboftry < this.maxtry) {
+          this.nboftry++;
+        } else {
+          alert("Tu as perdu :(");
+        }
+      }
     },
     // Make visual change to the table
     editVisuallyTable() {

@@ -1,8 +1,7 @@
 <template>
   <div class="home d-flex align-items-center justify-content-center">
       <div>
-            <h1 class="text-white">Partie letsgoo</h1>
-            <h2 class="text-white">{{ word }}</h2>
+            <h1 class="text-white my-5">A quel mot pense Mister Nanaba ?</h1>
             <ArrayGame :wordinfos="this.wordInfos" />
             
       </div>
@@ -10,7 +9,6 @@
 </template>
 
 <script>
-// @ is an alias to /src
 import ArrayGame from '@/components/ArrayGame.vue';
 
 export default {
@@ -20,7 +18,7 @@ export default {
     name: "DailyWord",
     data() {
         return {
-            word: "Romarin",
+            word: "Carotte",
             wordInfos:{}
         }
     },

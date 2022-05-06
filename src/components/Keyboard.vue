@@ -13,10 +13,10 @@ export default {
   data() {
     return {
       letters: {
-        line1:['A','Z','E','R','T','Y','U','I','O','P'],
-        line2:['Q','S','D','F','G','H','J','K','L','M'],
-        line3:['<span class="material-symbols-outlined">backspace</span>','W','X','C','V','B','N','<span class="material-symbols-outlined">done</span>'],
-      }
+          line1:['A','Z','E','R','T','Y','U','I','O','P'],
+          line2:['Q','S','D','F','G','H','J','K','L','M'],
+          line3:['<span class="material-symbols-outlined">backspace</span>','W','X','C','V','B','N','<span class="material-symbols-outlined">done</span>'],
+        }
       }
   },
   methods: {
@@ -61,12 +61,16 @@ export default {
     transition: all .3s ease;
 }
 
-#keyboard span:hover { 
+#keyboard [id^="line"] > span:hover { 
     background-color:blueviolet;
 }
 
 #line1, #line2, #line3 {
     display: flex;
     justify-content: center;
+}
+
+#line3 span:last-child, #line3 span:first-child {
+  width: 90px;
 }
 </style>
