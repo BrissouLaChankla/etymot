@@ -20,7 +20,7 @@ export default {
     name: "DailyWord",
     data() {
         return {
-            word: "Remisterio",
+            word: "Romarin",
             wordInfos:{}
         }
     },

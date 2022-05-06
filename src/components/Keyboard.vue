@@ -1,7 +1,7 @@
 <template>
   <div id="keyboard" class="text-white mt-5">
     <div v-for="(line, index) in letters" :key="line.id" :id="index">
-      <span v-html="letter" v-for="letter in line" :key="letter.index" @click="addLetter">
+      <span v-html="letter" v-for="letter in line" :key="letter.index" @click="sendLetter">
 
       </span>
     </div>
@@ -15,17 +15,31 @@ export default {
       letters: {
         line1:['A','Z','E','R','T','Y','U','I','O','P'],
         line2:['Q','S','D','F','G','H','J','K','L','M'],
-        
         line3:['<span class="material-symbols-outlined">backspace</span>','W','X','C','V','B','N','<span class="material-symbols-outlined">done</span>'],
-
       }
       }
   },
   methods: {
-    addLetter(e) {
-      let letter = e.target.innerText;
-      this.$emit("addletter", letter);
+    sendLetter(e) {
+      let letter = e.target.innerText.toUpperCase();
+      this.$emit("sendletter", letter);
+    },
+    catchKeyPress() {
+      // Add event listener on keyup
+      document.addEventListener('keyup', (event) => {
+        // Detect alpha + backspace + enter
+        if(event.which <= 90 && event.which >= 65 || event.which == 8 || event.which == 13) {
+          let key = event.key;
+          if(event.which == 13 ) {
+            key = "done";
+          }
+          this.$emit("sendletter", key.toUpperCase());
+        }
+      }, false);
     }
+  },
+  mounted() {
+    this.catchKeyPress();
   }
 }
 </script>
