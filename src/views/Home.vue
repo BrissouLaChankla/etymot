@@ -4,8 +4,8 @@
       <div>
         <img alt="logo" class="logo-home img-fluid" src="../assets/logo.png" />
         <p class="text-white">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis quo
-          perferendis deserunt eos. Cupiditate numquam ex, tempore.
+          Mister Nanaba pense à un mot... Mais il a oublié lequel ! <br>
+          Tu pourrais l'aider ? 
         </p>
         <div class="gamemodes">
           <router-link
@@ -35,6 +35,9 @@ export default {
   components: {
     // HelloWorld
   },
+  mounted() {
+  
+  }
 };
 </script>
 

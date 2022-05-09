@@ -1,5 +1,5 @@
 <template>
-  <div id="keyboard" class="text-white mt-5">
+  <div id="keyboard" class="text-white mt-3 mt-md-5">
     <div v-for="(line, index) in letters" :key="line.id" :id="index">
       <span v-html="letter" v-for="letter in line" :key="letter.index" @click="sendLetter">
 
@@ -9,7 +9,10 @@
 </template>
 
 <script>
+
+
 export default {
+  
   data() {
     return {
       letters: {
@@ -29,6 +32,7 @@ export default {
       document.addEventListener('keyup', (event) => {
         // Detect alpha + backspace + enter
         if(event.which <= 90 && event.which >= 65 || event.which == 8 || event.which == 13) {
+
           let key = event.key;
           if(event.which == 13 ) {
             key = "done";
@@ -37,6 +41,7 @@ export default {
         }
       }, false);
     }
+    
   },
   mounted() {
     this.catchKeyPress();
@@ -50,8 +55,8 @@ export default {
     align-items: center;
     justify-content: center;
 
-    height: 45px;
-    width:40px;
+    height: 30px;
+    width:24px;
 
     margin:8px 4px;
     font-weight: bold;
@@ -59,6 +64,20 @@ export default {
     border-radius:5px;
     cursor: pointer;
     transition: all .3s ease;
+}
+
+#line3 span:last-child, #line3 span:first-child {
+  width: 56px;
+}
+
+@media screen and (min-width: 640px) {
+  [id^="line"] > span {
+    height: 45px;
+    width: 40px;
+  }
+  #line3 span:last-child, #line3 span:first-child {
+    width: 90px;
+  }
 }
 
 #keyboard [id^="line"] > span:hover { 
@@ -70,7 +89,5 @@ export default {
     justify-content: center;
 }
 
-#line3 span:last-child, #line3 span:first-child {
-  width: 90px;
-}
+
 </style>

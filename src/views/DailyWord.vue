@@ -1,7 +1,7 @@
 <template>
   <div class="home d-flex align-items-center justify-content-center">
       <div>
-            <h1 class="text-white my-5">A quel mot pense Mister Nanaba ?</h1>
+            <h1 class="text-white my-3 my-md-5">A quel mot pense Mister Nanaba ?</h1>
             <ArrayGame :wordinfos="this.wordInfos" />
             
       </div>
@@ -18,7 +18,7 @@ export default {
     name: "DailyWord",
     data() {
         return {
-            word: "Carotte",
+            word: "Canada",
             wordInfos:{}
         }
     },
