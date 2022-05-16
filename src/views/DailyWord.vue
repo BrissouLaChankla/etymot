@@ -18,7 +18,7 @@ export default {
     name: "DailyWord",
     data() {
         return {
-            word: "Canada",
+            word: "Gateau",
             wordInfos:{}
         }
     },

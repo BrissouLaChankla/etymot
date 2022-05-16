@@ -2,8 +2,8 @@
   <table class="m-auto">
     <tr v-for="i in this.maxtry" :key="i" :data-line="i">
       <td v-for="j in wordinfos.size" :key="j">
-        <!-- Write first letter of the word at the top left of the table ff-->
-        {{ i == nboftry && j == 1 ? wordinfos.firstLetter : "." }}
+        <!-- Write first letter of the word at the top left of the table -->
+        {{ i <= nboftry && j == 1 ? wordinfos.firstLetter : "." }}
       </td>
     </tr>
   </table>
@@ -17,15 +17,14 @@ import normalLetterSound from "@/assets/sounds/letter.wav";
 import fullLetterSound from "@/assets/sounds/full.wav";
 
 // Libraries
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 const Toast = Swal.mixin({
   toast: true,
-  position: 'top',
+  position: "top",
   showConfirmButton: false,
   timer: 2000,
-  timerProgressBar: true
-})
-
+  timerProgressBar: true,
+});
 
 // Components
 import KeyBoard from "@/components/Keyboard.vue";
@@ -42,7 +41,6 @@ export default {
       nboftry: 1,
       maxtry: 6,
     };
-    
   },
   methods: {
     editWordArray(letter) {
@@ -56,11 +54,11 @@ export default {
           break;
         case "DONE":
           if (index !== -1) {
-           Toast.fire({
-            icon: 'error',
-            title: 'Le mot est incomplet !'
-          })
-          this.playSound(fullLetterSound);
+            Toast.fire({
+              icon: "error",
+              title: "Le mot est incomplet !",
+            });
+            this.playSound(fullLetterSound);
           } else {
             this.tryGuessing();
           }
@@ -82,11 +80,10 @@ export default {
         //  and replace by the pressed letter
         this.playSound(normalLetterSound);
         this.currentword[index] = letter;
-        this.editVisuallyTable();
+        this.editVisuallyTable(index);
       } else {
         this.playSound(fullLetterSound);
       }
-
     },
 
     removeLetterFromArray() {
@@ -95,55 +92,52 @@ export default {
       if (index !== -1) {
         // Find the position of occurence and replace
         this.currentword[index - 1] = ".";
-
+        this.editVisuallyTable(index-1);
       } else {
-        this.currentword.pop();
-        this.currentword.push(".");
+        this.currentword[this.currentword.length-1] = "."
+        this.editVisuallyTable(this.currentword.length-1);
       }
-      this.editVisuallyTable();
+
     },
 
     tryGuessing() {
       // check si partie gagnée
-      if (this.currentword.join("") == this.wordinfos.word) {
         this.addHints();
-         Swal.fire({
-            icon: 'success',
-            title: 'Bravo !!!',
-            html: 'Tu as trouvé le mot du jour qui était : <strong>CANADA</strong>',
-             confirmButtonText: 'Revenir à l\'accueil',
-            footer: 'Partage ton score à tes amis : '
-          })
+      if (this.currentword.join("") == this.wordinfos.word) {
+        Swal.fire({
+          icon: "success",
+          title: "Bravo !!!",
+          html: "Tu as trouvé le mot du jour qui était : <strong>"+this.wordinfos.word+"</strong>",
+          confirmButtonText: "Revenir à l'accueil",
+          footer: "Partage ton score à tes amis : ",
+        });
       } else {
         // Check si partie finie
         if (this.nboftry < this.maxtry) {
-          this.addHints();
           this.nboftry++;
         } else {
-           Swal.fire({
-            icon: 'error',
-            title: 'Aïe..',
-            html: 'Aïe, tu n\'as pas réussi pour aujourd\'hui, mais retente ta chance demain !',
-             confirmButtonText: 'Revenir à l\'accueil'
-          })
+          Swal.fire({
+            icon: "error",
+            title: "Aïe..",
+            html: "Aïe, tu n'as pas réussi pour aujourd'hui, mais retente ta chance demain !",
+            confirmButtonText: "Revenir à l'accueil",
+          });
         }
       }
     },
     // Make visual change to the table
-    editVisuallyTable() {
+    editVisuallyTable(indexOfLetter) {
       let rowtochange = document.querySelector(
         '[data-line="' + this.nboftry + '"]'
       );
-      rowtochange.innerHTML = "";
-      this.currentword.forEach((letterofcurrentword) => {
-        rowtochange.insertAdjacentHTML(
-          "beforeend",
-          `
-                 <td>${letterofcurrentword}</td>
-          `
-        );
-      });
-      // console.log(this.currentword);
+
+      let boxToChange = rowtochange.children[indexOfLetter];
+      boxToChange.innerHTML = this.currentword[indexOfLetter];
+      // console.log(this.currentword[indexOfLetter]);
+      boxToChange.classList.toggle("animate__animated");
+      boxToChange.classList.toggle("animate__flip");
+      boxToChange.classList.toggle("bg-primary");
+
     },
     addHints() {
       let rowtochange = document.querySelector(
@@ -152,13 +146,16 @@ export default {
       let allLettersTd = rowtochange.querySelectorAll("td");
       // allLettersTd[0].classList.add("bg-warning")
 
-      // Parcours le mot proposé
+      // Parcours le mot proposé letter par lettre
       this.currentword.forEach((el, i) => {
-        let index = this.wordinfos.arrayWord.indexOf(el);
-        if (index !== -1) {
-          allLettersTd[i].classList.add("bg-warning");
-          if (index == i) {
-            allLettersTd[i].classList.add("bg-danger");
+        // Find letter at good emplacement
+        if (this.currentword[i] == this.wordinfos.arrayWord[i]) {
+          allLettersTd[i].classList.add("bg-danger");
+        } else {
+          let index = this.wordinfos.arrayWord.indexOf(el);
+          // Si elle apparait
+          if (index !== -1) {
+            allLettersTd[i].classList.add("bg-warning");
           }
         }
       });
@@ -193,7 +190,7 @@ td {
 }
 
 /* Swal2 */
-.swal2-container.swal2-top>.swal2-popup{
-  width: 82%!important;
+.swal2-container.swal2-top > .swal2-popup {
+  width: 82% !important;
 }
 </style>
