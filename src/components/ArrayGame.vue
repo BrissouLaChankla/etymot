@@ -3,7 +3,6 @@
     <tr v-for="i in this.maxtry" :key="i" :data-line="i">
 
       <td v-for="j in wordinfos.size" :key="j">
-        
         <!-- Write first letter of the word at the top left of the table -->
         {{ i <= nboftry ? this.currentword[j-1] : "" }}
       </td>
@@ -227,7 +226,11 @@ export default {
     this.letteroccurencereset = structuredClone(this.letteroccurence);
     this.currentWordWithHints= structuredClone(this.currentword);
 
-    
+    console.table(this.letteroccurence);
+
+  },
+  beforeUpdate() {
+    console.table(this.letteroccurence);
   }
 };
 </script>

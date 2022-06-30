@@ -17,11 +17,15 @@ export default {
   name: "DailyWord",
   data() {
     return {
-      word: "Cactus",
+      word: "",
       wordInfos: "",
     };
   },
-  mounted() {
+  async mounted() {
+    const response = await fetch("https://dev.nanagames.io/api/get/dailyword");
+      const data = await response.json();
+      this.word = data;
+
     let word = this.word.toUpperCase();
     let arrayWord = Array.from(word);
     let firstLetter = arrayWord[0];
