@@ -1,31 +1,68 @@
 <template>
-  <!-- <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div> -->
+
   <router-view/>
 </template>
 
 <style>
+
+:root {
+    --main-color-dark: #B15301;
+    --main-color: #fd7f12;
+    --main-color-light: #FD9A44;
+    --main-color-lighter: #FFF7F0;
+    --secondary: #ffd800;
+    --red:red;
+    --green:green;
+    --gray-light:#fafafa;
+}
+
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Poppins', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
 }
 
-#nav {
-  padding: 30px;
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Fredoka One', cursive;
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+/* Section bouton */
+.btn {
+    padding: 0.75rem 2.25rem;
+    border-radius: 12px;
+    border: 0;
+    font-weight: bold;
+    letter-spacing: .8px;
+    border-bottom: 5px solid var(--main-color-dark);
 }
 
-#nav a.router-link-exact-active {
-  color: #42b983;
+.btn:active {
+    border-bottom:0;
+    transform: translateY(5px);
+    margin-bottom: 5px;
 }
+  
+.btn-primary {
+    background-color: var(--main-color);
+    color: white!important;
+}
+
+.btn-primary:hover {
+      background-color: var(--main-color-light);
+      border-color: var(--main-color-dark);
+  }
+
+.btn-white {
+    background-color: white;
+    color: var(--main-color);
+}
+
+.btn-white:hover {
+    color: var(--main-color-light);
+}
+
 
 </style>

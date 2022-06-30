@@ -1,21 +1,45 @@
 <template>
   <div class="home d-flex align-items-center justify-content-center">
-    <h1 class="text-white">Partie random</h1>
+    <div>
+      <h1 class="text-white my-3 my-md-5">A quel mot pense Mister Nanaba ?</h1>
+      <ArrayGame v-if="this.wordInfos" :wordinfos="this.wordInfos" />
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-// import HelloWorld from '@/components/HelloWorld.vue'
+import ArrayGame from "@/components/ArrayGame.vue";
 
 export default {
-  name: "RandomWord",
   components: {
-    // HelloWorld
+    ArrayGame,
+  },
+  name: "DailyWord",
+  data() {
+    return {
+      word: "",
+      wordInfos: "",
+    };
+  },
+  async mounted() {
+    const response = await fetch("https://dev.nanagames.io/api/get/randomword");
+      const data = await response.json();
+      this.word = data;
+
+    let word = this.word.toUpperCase();
+    let arrayWord = Array.from(word);
+    let firstLetter = arrayWord[0];
+    let wordSize = arrayWord.length;
+
+    this.wordInfos = {
+      word: word,
+      arrayWord: arrayWord,
+      firstLetter: firstLetter,
+      size: wordSize,
+    };
   },
 };
 </script>
 
 <style>
-
 </style>

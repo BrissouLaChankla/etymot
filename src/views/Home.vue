@@ -1,24 +1,28 @@
 <template>
   <div class="home d-flex align-items-center justify-content-center">
+    <a href="">
+      <img alt="logo" class="logo-home img-fluid" src="../assets/logo.png" />
+    </a>
     <div class="home-content">
       <div>
-        <img alt="logo" class="logo-home img-fluid" src="../assets/logo.png" />
-        <p class="text-white">
+        <h1>Tusmo</h1>
+        <p class="text-muted">
           Mister Nanaba pense à un mot... Mais il a oublié lequel ! <br>
           Tu pourrais l'aider ? 
         </p>
-        <div class="gamemodes">
+        <h5 class="text-muted">Choisis ton mode de jeu</h5>
+        <div class="gamemodes d-flex justify-content-around">
           <router-link
             :to="{ name: 'DailyWord' }"
-            class="text-decoration-none text-primary"
+            class="text-decoration-none btn-primary btn "
           >
-            <h2>Mot du jour</h2>
+           Mot du jour
           </router-link>
           <router-link
             :to="{ name: 'RandomWord' }"
-            class="text-decoration-none text-primary"
+            class="text-decoration-none btn btn-white"
           >
-            <h2>Mot aléatoire</h2>
+           Mot aléatoire
           </router-link>
         </div>
       </div>
@@ -42,27 +46,22 @@ export default {
 </script>
 
 <style>
+.logo-home {
+  max-width:234px;
+  position: fixed;
+  top: 0;
+  left: 60px;
+}
+
 .home {
   min-height: 100vh;
-  background-image: linear-gradient(
-    to bottom,
-    #0a4160,
-    #0a4464,
-    #0b4668,
-    #0b496c,
-    #0c4c70,
-    #0c4c70,
-    #0d4c70,
-    #0d4c70,
-    #0d496b,
-    #0d4567,
-    #0c4262,
-    #0c3f5e
-  );
+  background-image:url("../assets/bg/bg_home.webp");
+  background-size: cover;
+  background-position: bottom;
 }
 
 .home-content {
-  max-width: 400px;
+  max-width: 600px;
 }
 
 .gamemodes h2 {
