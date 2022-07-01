@@ -1,18 +1,22 @@
 <template>
   <div class="home d-flex align-items-center justify-content-center">
     <div>
-      <h1 class="text-white my-3 my-md-5">A quel mot pense Mister Nanaba ?</h1>
+      <h1 class="my-3 my-md-5">A quel mot pense Mister Nanaba ?</h1>
+      <Indications />
       <ArrayGame v-if="this.wordInfos" :wordinfos="this.wordInfos" />
     </div>
+    <img src="../assets/mister-nanaba/faq.webp" class="nana-faq d-none d-xl-block" alt="Mister Nanaba Cherche">
   </div>
 </template>
 
 <script>
 import ArrayGame from "@/components/ArrayGame.vue";
+import Indications from "@/components/Indications.vue";
 
 export default {
   components: {
     ArrayGame,
+    Indications
   },
   name: "DailyWord",
   data() {
@@ -41,5 +45,16 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+
+.nana-faq {
+  position: absolute;
+  left: 40px;
+  bottom: 0;
+  max-width: 310px;
+}
+
+.home { 
+  background-image:url("../assets/bg/bg_game.webp");
+}
 </style>

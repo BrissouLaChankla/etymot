@@ -1,5 +1,5 @@
 <template>
-  <div id="keyboard" class="text-white mt-3 mt-md-5">
+  <div id="keyboard" class="mt-3 mt-md-5">
     <div v-for="(line, index) in letters" :key="line.id" :id="index">
       <span v-html="letter" v-for="letter in line" :key="letter.index" @click="sendLetter">
 
@@ -18,7 +18,7 @@ export default {
       letters: {
           line1:['A','Z','E','R','T','Y','U','I','O','P'],
           line2:['Q','S','D','F','G','H','J','K','L','M'],
-          line3:['<span class="material-symbols-outlined">backspace</span>','W','X','C','V','B','N','<span class="material-symbols-outlined">done</span>'],
+          line3:['<span class="material-symbols-rounded">backspace</span>','W','X','C','V','B','N','<span class="material-symbols-rounded">done</span>'],
         }
       }
   },
@@ -60,10 +60,11 @@ export default {
 
     margin:8px 4px;
     font-weight: bold;
-    border:1px solid white;
+    border:2px solid var(--soft-orange);
     border-radius:5px;
     cursor: pointer;
     transition: all .3s ease;
+    
 }
 
 #line3 span:last-child, #line3 span:first-child {

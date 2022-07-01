@@ -147,10 +147,12 @@ export default {
         boxToChange.classList.add("animate__animated");
         boxToChange.classList.add("animate__flip");
         boxToChange.classList.add("bg-primary");
+        boxToChange.classList.add("text-white");
       } else {
          boxToChange.classList.remove("animate__animated");
           boxToChange.classList.remove("animate__flip");
           boxToChange.classList.remove("bg-primary");
+          boxToChange.classList.remove("text-white");
       }
 
     },
@@ -171,6 +173,7 @@ export default {
         // Si la lettre est au bon emplacement
           if (this.currentword[i] == this.wordinfos.arrayWord[i]) {
             allLettersTd[i].classList.add("bg-danger");
+            allLettersTd[i].classList.add("text-white");
             this.currentWordWithHints[i] = allLettersTd[i].textContent;
           } else {
             this.currentWordWithHints[i] = ".";
@@ -236,9 +239,7 @@ export default {
 </script>
 <style>
 td {
-  border: solid 3px white;
-  color: white;
-  font-weight: bold;
+  border: solid 3px var(--soft-orange);
   font-size: 2.5rem;
   width: 3rem;
   height: 4rem;

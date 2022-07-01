@@ -5,12 +5,16 @@
     </a>
     <div class="home-content">
       <div>
-        <h1>Tusmo</h1>
-        <p class="text-muted">
+        <h1>
+          
+          Devine
+          <Underlined word="mot" />
+        </h1>
+        <p class="text-muted my-4">
           Mister Nanaba pense à un mot... Mais il a oublié lequel ! <br>
           Tu pourrais l'aider ? 
         </p>
-        <h5 class="text-muted">Choisis ton mode de jeu</h5>
+        <h5 class="text-muted mb-4">Choisis ton mode de jeu !</h5>
         <div class="gamemodes d-flex justify-content-around">
           <router-link
             :to="{ name: 'DailyWord' }"
@@ -27,17 +31,18 @@
         </div>
       </div>
     </div>
+    <img src="../assets/mister-nanaba/longue-vue.webp" class="nana-longue-vue" alt="Mister Nanaba avec une longue vue">
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-// import HelloWorld from '@/components/HelloWorld.vue'
+import Underlined from '@/components/Underlined.vue'
 
 export default {
   name: "Home",
   components: {
-    // HelloWorld
+    Underlined
   },
   mounted() {
   
@@ -70,6 +75,14 @@ export default {
   padding: 20px;
   border-radius: 15px;
 }
+
+.nana-longue-vue {
+  position: absolute;
+  bottom: -180px;
+  left: -10px;
+  max-width: 356px;
+}
+
 
 
 </style>

@@ -4,15 +4,19 @@
 </template>
 
 <style>
-
+.text-muted {
+  color:#7a7a7a;
+}
 :root {
     --main-color-dark: #B15301;
     --main-color: #fd7f12;
     --main-color-light: #FD9A44;
     --main-color-lighter: #FFF7F0;
     --secondary: #ffd800;
+    --purple:#c90a4c;
     --red:red;
     --green:green;
+    --soft-orange:#fec08b;
     --gray-light:#fafafa;
 }
 
@@ -25,9 +29,11 @@
   color: #2c3e50;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6, table {
   font-family: 'Fredoka One', cursive;
 }
+
+
 
 /* Section bouton */
 .btn {
