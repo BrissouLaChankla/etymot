@@ -1,9 +1,12 @@
 <template>
   <div class="home d-flex align-items-center justify-content-center">
-    <div>
+    <div class="mx-5" style="z-index:3">
       <h1 class="my-3 my-md-5">A quel mot pense Mister Nanaba ?</h1>
       <Indications />
       <ArrayGame v-if="this.wordInfos" :wordinfos="this.wordInfos" />
+      <div v-if="loading" class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
     </div>
     <img src="../assets/mister-nanaba/faq.webp" class="nana-faq d-none d-xl-block" alt="Mister Nanaba Cherche">
   </div>
@@ -14,38 +17,49 @@ import ArrayGame from "@/components/ArrayGame.vue";
 import Indications from "@/components/Indications.vue";
 
 export default {
+  props:["difficulty"],
   components: {
     ArrayGame,
     Indications
   },
-  name: "DailyWord",
+  name: "RandomWord",
   data() {
     return {
+      loading:true,
       word: "",
       wordInfos: "",
     };
   },
   async mounted() {
-    const response = await fetch("https://dev.nanagames.io/api/get/randomword");
+    const response = await fetch("https://dev.nanagames.io/api/get/"+this.difficulty+"/randomword");
       const data = await response.json();
-      this.word = data;
+      this.loading = false;
+      this.word = data.name;
+
+    if(document.querySelector('.modal-backdrop')) {
+      document.querySelector('.modal-backdrop').remove();
+    }
 
     let word = this.word.toUpperCase();
     let arrayWord = Array.from(word);
     let firstLetter = arrayWord[0];
     let wordSize = arrayWord.length;
+    let wordTheme = data.theme;
 
     this.wordInfos = {
       word: word,
       arrayWord: arrayWord,
       firstLetter: firstLetter,
       size: wordSize,
+      theme: wordTheme
     };
   },
 };
 </script>
 
 <style scoped>
+
+
 
 .nana-faq {
   position: absolute;

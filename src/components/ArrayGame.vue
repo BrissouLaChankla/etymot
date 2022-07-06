@@ -1,13 +1,13 @@
 <template>
   <table class="m-auto">
     <tr v-for="i in this.maxtry" :key="i" :data-line="i">
-
       <td v-for="j in wordinfos.size" :key="j">
         <!-- Write first letter of the word at the top left of the table -->
         {{ i <= nboftry ? this.currentword[j-1] : "" }}
       </td>
     </tr>
   </table>
+  <Hint :nboftry="this.nboftry" :wordtheme="wordinfos.theme" />
 
   <KeyBoard @sendletter="editWordArray" />
 </template>
@@ -29,10 +29,12 @@ const Toast = Swal.mixin({
 
 // Components
 import KeyBoard from "@/components/Keyboard.vue";
+import Hint from "@/components/Hint.vue";
 
 export default {
   components: {
     KeyBoard,
+    Hint
   },
   props: ["wordinfos"],
   data() {
@@ -173,7 +175,6 @@ export default {
         // Si la lettre est au bon emplacement
           if (this.currentword[i] == this.wordinfos.arrayWord[i]) {
             allLettersTd[i].classList.add("bg-danger");
-            allLettersTd[i].classList.add("text-white");
             this.currentWordWithHints[i] = allLettersTd[i].textContent;
           } else {
             this.currentWordWithHints[i] = ".";
@@ -229,15 +230,20 @@ export default {
     this.letteroccurencereset = structuredClone(this.letteroccurence);
     this.currentWordWithHints= structuredClone(this.currentword);
 
-    console.table(this.letteroccurence);
+    // console.table(this.letteroccurence);
+  
 
   },
   beforeUpdate() {
-    console.table(this.letteroccurence);
+    console.table(this.wordinfos.word);
   }
 };
 </script>
-<style>
+<style scoped>
+table {
+  width:100%;
+}
+
 td {
   border: solid 3px var(--soft-orange);
   font-size: 2.5rem;
@@ -250,7 +256,26 @@ td {
     width: 5rem;
     height: 5rem;
   }
+  table {
+    width: auto;
+  }
 }
+
+.bg-primary {
+ background-color: var(--purple)!important;
+  color:white!important;
+}
+
+.bg-warning {
+  background-color: var(--main-color)!important;
+  color:white!important
+}
+
+.bg-danger {
+  background-color: var(--secondary)!important;
+  color:white!important;
+}
+
 
 /* Swal2 */
 .swal2-container.swal2-top > .swal2-popup {

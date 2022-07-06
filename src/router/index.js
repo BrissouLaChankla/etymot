@@ -15,9 +15,10 @@ const routes = [
     component: DailyWord
   },
   {
-    path:'/randomword-game',
+    path:'/:difficulty/randomword-game',
     name: 'RandomWord',
-    component: RandomWord
+    component: RandomWord,
+    props: true
   },
   {
     path: '/about',

@@ -22,12 +22,13 @@
           >
            Mot du jour
           </router-link>
-          <router-link
-            :to="{ name: 'RandomWord' }"
-            class="text-decoration-none btn btn-white"
-          >
-           Mot aléatoire
-          </router-link>
+
+          
+          <button type="button" class="btn btn-white" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              Mot aléatoire
+          </button>
+          <BSModal />
+
         </div>
       </div>
     </div>
@@ -38,11 +39,22 @@
 <script>
 // @ is an alias to /src
 import Underlined from '@/components/Underlined.vue'
+import BSModal from '../components/BSModal.vue';
+
 
 export default {
+  data() {
+    return {
+
+    }
+  },
   name: "Home",
   components: {
-    Underlined
+    Underlined,
+    BSModal
+  },
+  methods: {
+  
   },
   mounted() {
   
@@ -58,11 +70,12 @@ export default {
   left: 60px;
 }
 
+
 .home {
   min-height: 100vh;
   background-image:url("../assets/bg/bg_home.webp");
   background-size: cover;
-  background-position: bottom;
+  background-position: bottom
 }
 
 .home-content {

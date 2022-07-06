@@ -18,6 +18,7 @@
     --green:green;
     --soft-orange:#fec08b;
     --gray-light:#fafafa;
+    --table-bg: #fefaf3;
 }
 
 
@@ -31,6 +32,11 @@
 
 h1, h2, h3, h4, h5, h6, table {
   font-family: 'Fredoka One', cursive;
+}
+
+table {
+  background-color:var(--table-bg);
+  z-index: 2;
 }
 
 
@@ -71,4 +77,22 @@ h1, h2, h3, h4, h5, h6, table {
 }
 
 
+/* Colors */
+
+
+
+.bg-correct {
+  background-color: var(--secondary)!important;
+  color:white!important;
+}
+
+.bg-almost {
+  background-color: var(--main-color)!important;
+  color:white!important;
+}
+
+.bg-wrong {
+  background-color: var(--purple)!important;
+  color:white!important;
+}
 </style>

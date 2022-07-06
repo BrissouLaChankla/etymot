@@ -82,7 +82,8 @@ export default {
 }
 
 #keyboard [id^="line"] > span:hover { 
-    background-color:blueviolet;
+    background-color:var(--main-color);
+    color: white;
 }
 
 #line1, #line2, #line3 {
