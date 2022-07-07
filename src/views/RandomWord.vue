@@ -3,7 +3,7 @@
     <div class="mx-5" style="z-index:3">
       <h1 class="my-3 my-md-5">A quel mot pense Mister Nanaba ?</h1>
       <Indications />
-      <ArrayGame v-if="this.wordInfos" :wordinfos="this.wordInfos" />
+      <ArrayGame v-if="this.wordInfos"  :wordinfos="this.wordInfos" />
       <div v-if="loading" class="spinner-border" role="status">
         <span class="visually-hidden">Loading...</span>
       </div>
@@ -31,7 +31,7 @@ export default {
     };
   },
   async mounted() {
-    const response = await fetch("https://dev.nanagames.io/api/get/"+this.difficulty+"/randomword");
+    const response = await fetch("https://nanagames.io/api/get/"+this.difficulty+"/randomword");
       const data = await response.json();
       this.loading = false;
       this.word = data.name;
@@ -69,6 +69,6 @@ export default {
 }
 
 .home { 
-  background-image:url("../assets/bg/bg_game.webp");
+  background-image:url("../assets/bg/bg_game.svg");
 }
 </style>

@@ -35,10 +35,11 @@ export default {
         },
 
         showModalHint() {
+            
            Swal.fire({
             title: 'Tu veux un indice ?',
-            text: "Tu vas prendre -100 à ton score !",
-            icon: 'warning',
+            text: "On te donne la catégorie du mot que tu dois trouver !",
+            icon: 'question',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
@@ -51,7 +52,11 @@ export default {
                     document.querySelector(".hintBackdrop").classList.remove("d-none");
                     setTimeout(() => {  document.querySelector(".img-container").classList.add("slideIn"); }, 200);
                 }
-            })
+            });
+
+            document.querySelector('.swal2-confirm').classList.add('btn');
+            document.querySelector('.swal2-confirm').classList.add('btn-primary');
+
         },
         closeModalHint() {
             document.querySelector(".img-container").classList.remove("slideIn");
@@ -82,6 +87,10 @@ export default {
 </script>
 
 <style scoped>
+
+
+
+
 
 .getHint {
     position: absolute;

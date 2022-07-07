@@ -40,7 +40,7 @@ export default {
     KeyBoard,
     Hint
   },
-  props: ["wordinfos"],
+  props: ["wordinfos", "daily"],
   data() {
     return {
       currentword: [],
@@ -120,33 +120,42 @@ export default {
       // check si partie gagnée
         this.addHints();
       if (this.currentword.join("") == this.wordinfos.word) {
-         let imagePath = require("@/assets/MNanabafete.svg");
-
+         let videoPath = require("@/assets/mister-nanaba/win.webm");
         Swal.fire({
 
           // icon: "success",
-          title: "Bravo !!!",
+          title: "Eh bravo toi !",
+          width: 600,
           allowOutsideClick: false,
-          imageUrl: imagePath,
-          imageHeight: 200,
-          imageWidth:200,
-          
           // color: '#ffffff',
           color: '#000',
-          html: "Tu as trouvé le mot du jour qui était : <strong>"+this.wordinfos.word+"</strong>",
-          confirmButtonText: "Revenir à l'accueil",
-          // confirmButtonText: '<a href="">Oui</a>',
-          // html:'<span id="my-canvas"> oui </span>',
-          
-          // onClose: () => {
-          //   this.$router.push({ name: 'Home' })
-          // },
+          html: `
+          <div class="text-center" style="margin-top:-20px">
+            <video autoplay loop muted width="350">
+                <source src="${videoPath}"
+                        type="video/webm">
 
-          footer: "Partage ton score à tes amis : ",
+                Tu as gagné!
+            </video>
+          </div>
+          Tu as trouvé le mot qui était : <span class="fredoka">${this.wordinfos.word}</span> !
+            <div class="d-flex py-3 mt-4 align-items-center justify-content-center">
+                <a href="/"
+                  class="btn btn-primary mx-2"
+                > Retour à l'accueil </a>
+                <a href="javascript:window.location.href=window.location.href"
+                  class="btn btn-primary mx-2"
+                > Rejouer </a>
+            </div>
+            
+          `,
+
+          // footer: `Partage ton score à tes amis : 
+          //  <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button"> Tweet</a>`,
           background:'#fff',
+          showConfirmButton: false,
           backdrop: `
             rgba(0, 0, 0, 0.75)
-            
             top
             no-repeat
           `
@@ -194,24 +203,36 @@ export default {
         if (this.nboftry < this.maxtry) {
           this.nboftry++;
         } else {
-          let imagePath2 = require("@/assets/Ntriste.svg");
+          let imagePath = require("@/assets/mister-nanaba/sad.svg");
           Swal.fire({
             // icon: "error",
-            imageUrl: imagePath2,
-            title: "Aïe..",
+            title: "Dommage...",
+             width: 600,
             allowOutsideClick: false,
-            html: "Aïe, tu n'as pas réussi pour aujourd'hui, mais retente ta chance demain !",
-            confirmButtonText: "Revenir à l'accueil",
+            html: `
+              <div class="text-center mb-4">
+                <img style="width:350px" src="${imagePath}" />
+              </div>
+
+                Tu n'as pas réussi à trouver le mot auquel pensait Mister Nanaba... <br>
+               ${ (this.daily) ? '' : 'Mais ça lui est revenu, c\'était : <span class="fredoka">"'+this.wordinfos.word+'"</span>'}
+                
+                <div class="d-flex py-3 mt-4 align-items-center justify-content-center">
+                    <a href="/"
+                      class="btn btn-primary mx-2"
+                    > Retour à l'accueil </a>
+                    <a href="javascript:window.location.href=window.location.href"
+                      class="btn btn-primary mx-2"
+                    > Rejouer </a>
+                </div>
+              `,
+            showConfirmButton: false,
+             backdrop: `
+            rgba(0, 0, 0, 0.75)
+            top
+            no-repeat
+          `
           
-            imageHeight: 200,
-            imageWidth:200,
-            // color: '#ffffff',
-            background:'#0000',
-            backdrop: `
-              rgba(0,0,123,0.4)
-              top
-              no-repeat
-            `
           });
         }
       }
