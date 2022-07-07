@@ -6,6 +6,7 @@
         {{ i <= nboftry ? this.currentword[j-1] : "" }}
       </td>
     </tr>
+    <div id="my-canvas"></div>
   </table>
   <Hint :nboftry="this.nboftry" :wordtheme="wordinfos.theme" />
 
@@ -26,6 +27,9 @@ const Toast = Swal.mixin({
   timer: 2000,
   timerProgressBar: true,
 });
+
+
+import confetti from "canvas-confetti";
 
 // Components
 import KeyBoard from "@/components/Keyboard.vue";
@@ -112,26 +116,102 @@ export default {
     },
 
     tryGuessing() {
+
       // check si partie gagnée
         this.addHints();
       if (this.currentword.join("") == this.wordinfos.word) {
+         let imagePath = require("@/assets/MNanabafete.svg");
+
         Swal.fire({
-          icon: "success",
+
+          // icon: "success",
           title: "Bravo !!!",
+          allowOutsideClick: false,
+          imageUrl: imagePath,
+          imageHeight: 200,
+          imageWidth:200,
+          
+          // color: '#ffffff',
+          color: '#000',
           html: "Tu as trouvé le mot du jour qui était : <strong>"+this.wordinfos.word+"</strong>",
           confirmButtonText: "Revenir à l'accueil",
+          // confirmButtonText: '<a href="">Oui</a>',
+          // html:'<span id="my-canvas"> oui </span>',
+          
+          // onClose: () => {
+          //   this.$router.push({ name: 'Home' })
+          // },
+
           footer: "Partage ton score à tes amis : ",
+          background:'#fff',
+          backdrop: `
+            rgba(0, 0, 0, 0.75)
+            
+            top
+            no-repeat
+          `
         });
+
+
+          
+          var count = 200;
+          var defaults = {
+            origin: { y: 0.7 }
+          };
+
+          function fire(particleRatio, opts) {
+            confetti(Object.assign({}, defaults, opts, {
+              particleCount: Math.floor(count * particleRatio)
+            }));
+          }
+
+          fire(0.25, {
+            spread: 150,
+            startVelocity: 55,
+          });
+          fire(0.2, {
+            spread: 60,
+          });
+          fire(0.35, {
+            spread: 150,
+            decay: 0.91,
+            scalar: 0.8
+          });
+          fire(0.1, {
+            spread: 150,
+            startVelocity: 25,
+            decay: 0.92,
+            scalar: 1.2
+          });
+          fire(0.1, {
+            spread: 150,
+            startVelocity: 45,
+          });
+
+
       } else {
         // Check si partie finie
         if (this.nboftry < this.maxtry) {
           this.nboftry++;
         } else {
+          let imagePath2 = require("@/assets/Ntriste.svg");
           Swal.fire({
-            icon: "error",
+            // icon: "error",
+            imageUrl: imagePath2,
             title: "Aïe..",
+            allowOutsideClick: false,
             html: "Aïe, tu n'as pas réussi pour aujourd'hui, mais retente ta chance demain !",
             confirmButtonText: "Revenir à l'accueil",
+          
+            imageHeight: 200,
+            imageWidth:200,
+            // color: '#ffffff',
+            background:'#0000',
+            backdrop: `
+              rgba(0,0,123,0.4)
+              top
+              no-repeat
+            `
           });
         }
       }
@@ -236,8 +316,12 @@ export default {
   },
   beforeUpdate() {
     console.table(this.wordinfos.word);
-  }
+  },
+
+
 };
+
+
 </script>
 <style scoped>
 table {
@@ -281,4 +365,8 @@ td {
 .swal2-container.swal2-top > .swal2-popup {
   width: 82% !important;
 }
+
+
+
+
 </style>

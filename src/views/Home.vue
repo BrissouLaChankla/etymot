@@ -1,14 +1,21 @@
 <template>
-  <div class="home d-flex align-items-center justify-content-center">
-    <a href="">
-      <img alt="logo" class="logo-home img-fluid" src="../assets/logo.png" />
-    </a>
+  <div class="home">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-2">
+          <a href="#">
+            <img alt="logo" class="logo-home img-fluid text-start mt-5" src="../assets/logo.webp" />
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex align-items-center justify-content-center mt-5">
     <div class="home-content">
       <div>
-        <h1>
-          
-          Devine
-          <Underlined word="mot" />
+        <h1 class="fw-bold">
+         
+          <Underlined word="ÉtyMot"/>
         </h1>
         <p class="text-muted my-4">
           Mister Nanaba pense à un mot... Mais il a oublié lequel ! <br>
@@ -32,7 +39,8 @@
         </div>
       </div>
     </div>
-    <img src="../assets/mister-nanaba/longue-vue.webp" class="nana-longue-vue" alt="Mister Nanaba avec une longue vue">
+    <img src="../assets/mister-nanaba/longue-vue.webp" class="nana-longue-vue w-100 img-fluid" alt="Mister Nanaba avec une longue vue">
+  </div>
   </div>
 </template>
 
@@ -63,11 +71,15 @@ export default {
 </script>
 
 <style>
+
+body{
+  max-height: 100%;
+}
 .logo-home {
   max-width:234px;
-  position: fixed;
+  /* position: fixed;
   top: 0;
-  left: 60px;
+  left: 60px; */
 }
 
 
@@ -75,11 +87,13 @@ export default {
   min-height: 100vh;
   background-image:url("../assets/bg/bg_home.webp");
   background-size: cover;
-  background-position: bottom
+  background-position: bottom;
+ 
 }
 
 .home-content {
   max-width: 600px;
+  margin-top: 10%;
 }
 
 .gamemodes h2 {
@@ -92,9 +106,11 @@ export default {
 .nana-longue-vue {
   position: absolute;
   bottom: -180px;
-  left: -10px;
+  left: 30px;
   max-width: 356px;
 }
+
+
 
 
 
