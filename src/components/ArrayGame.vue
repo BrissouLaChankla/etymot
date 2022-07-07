@@ -152,8 +152,12 @@ export default {
                   class="btn btn-primary mx-2"
                 > Retour à l'accueil </a>
                 <a href="javascript:window.location.href=window.location.href"
-                  class="btn btn-primary mx-2"
-                > Rejouer </a>
+                      class="btn btn-primary mx-2"
+                    > <span class="material-symbols-rounded fw-bold d-block d-sm-none">
+                        replay
+                        </span> 
+                        <span class="d-none d-sm-block">Rejouer</span>
+                        </a>
             </div>
             
           `,
@@ -231,7 +235,11 @@ export default {
                     > Retour à l'accueil </a>
                     <a href="javascript:window.location.href=window.location.href"
                       class="btn btn-primary mx-2"
-                    > Rejouer </a>
+                    > <span class="material-symbols-rounded fw-bold d-block d-sm-none">
+                        replay
+                        </span> 
+                        <span class="d-none d-sm-block">Rejouer</span>
+                        </a>
                 </div>
               `,
             showConfirmButton: false,
@@ -346,10 +354,8 @@ export default {
     // console.table(this.letteroccurence);
   
 
-  },
-  beforeUpdate() {
-    console.log(this.currentword);
-  },
+  }
+
 
 
 };
