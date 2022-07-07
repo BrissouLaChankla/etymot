@@ -1,7 +1,12 @@
 <template>
   <div class="home d-flex align-items-center justify-content-center">
     <div class="mx-5" style="z-index:3">
-      <h1 class="my-3 my-md-5">A quel mot pense Mister Nanaba ?</h1>
+        <div class="mb-5 my-3 my-md-5 position-relative">
+          <h1>A quel mot pense Mister Nanaba ?</h1>
+            <a class="text-muted text-decoration-none d-flex align-items-center return-home" href="/"><span class="material-symbols-rounded">
+              chevron_left
+          </span> Accueil</a>
+      </div>
       <Indications />
       <ArrayGame v-if="this.wordInfos"  :wordinfos="this.wordInfos" />
       <div v-if="loading" class="spinner-border" role="status">
@@ -59,7 +64,10 @@ export default {
 
 <style scoped>
 
-
+.return-home {
+  position: absolute;
+  left:-6%;
+}
 
 .nana-faq {
   position: absolute;

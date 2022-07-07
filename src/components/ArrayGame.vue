@@ -1,9 +1,10 @@
 <template>
+
   <table class="m-auto">
-    <tr v-for="i in this.maxtry" :key="i" :data-line="i">
-      <td v-for="j in wordinfos.size" :key="j">
+    <tr v-for="currentTry in this.maxtry" :key="currentTry" :data-line="currentTry">
+      <td v-for="letterIndex in wordinfos.size" :key="letterIndex">
         <!-- Write first letter of the word at the top left of the table -->
-        {{ i <= nboftry ? this.currentword[j-1] : "" }}
+        {{ currentTry <= nboftry ? currentword[currentTry][letterIndex-1] : "" }}
       </td>
     </tr>
     <div id="my-canvas"></div>
@@ -43,7 +44,14 @@ export default {
   props: ["wordinfos", "daily"],
   data() {
     return {
-      currentword: [],
+      currentword: {
+        1:[],
+        2:[],
+        3:[],
+        4:[],
+        5:[],
+        6:[]
+      },
       currentWordWithHints: [],
       letteroccurence:[],
       letteroccurencereset:[],
@@ -53,7 +61,7 @@ export default {
   },
   methods: {
     editWordArray(letter) {
-      let index = this.currentword.indexOf(".");
+      let index = this.currentword[this.nboftry].indexOf(".");
       switch (letter) {
         case "BACKSPACE":
           // if not first or  "." not find
@@ -84,11 +92,11 @@ export default {
 
     addLetterToArray(letter) {
       // Find first "." on the current word array
-      let index = this.currentword.indexOf(".");
+      let index = this.currentword[this.nboftry].indexOf(".");
       if (index !== -1) {
         //  and replace by the pressed letter
         this.playSound(normalLetterSound);
-        this.currentword[index] = letter;
+        this.currentword[this.nboftry][index] = letter;
         this.editVisuallyTable(index, true);
       } else {
         this.playSound(fullLetterSound);
@@ -109,7 +117,7 @@ export default {
       });
 
       if (indexOfLastLetterAdded !== 0) {
-        this.currentword[indexOfLastLetterAdded] = "."
+        this.currentword[this.nboftry][indexOfLastLetterAdded] = "."
         this.editVisuallyTable(indexOfLastLetterAdded);
       }       
 
@@ -119,7 +127,7 @@ export default {
 
       // check si partie gagnée
         this.addHints();
-      if (this.currentword.join("") == this.wordinfos.word) {
+      if (this.currentword[this.nboftry].join("") == this.wordinfos.word) {
          let videoPath = require("@/assets/mister-nanaba/win.webm");
         Swal.fire({
 
@@ -244,8 +252,7 @@ export default {
       );
 
       let boxToChange = rowtochange.children[indexOfLetter];
-      boxToChange.innerHTML = this.currentword[indexOfLetter];
-      // console.log(boxToChange);
+      boxToChange.innerHTML = this.currentword[this.nboftry][indexOfLetter];
       if(adding) {
         boxToChange.classList.add("animate__animated");
         boxToChange.classList.add("animate__flip");
@@ -266,19 +273,21 @@ export default {
       let allLettersTd = rowtochange.querySelectorAll("td");
 
       // Parcours le mot proposé letter par lettre
-      this.currentword.forEach((el, i) => {
+      this.currentword[this.nboftry].forEach((el, i) => {
         let index = this.wordinfos.arrayWord.indexOf(el);
         // Index de la lettre dans letteroccurence
         let objIndex = this.letteroccurence.findIndex((obj => obj.letter == el));
         // if red or orange, désincrémente
-       if(this.currentword[i] === this.wordinfos.arrayWord[i] || index !== -1) {
+       if(this.currentword[this.nboftry][i] == this.wordinfos.arrayWord[i] || index !== -1) {
         
         // Si la lettre est au bon emplacement
-          if (this.currentword[i] == this.wordinfos.arrayWord[i]) {
+        // console.log("mot proposé : "+this.currentword[this.nboftry]);
+        // console.table(this.wordinfos);
+          if (this.currentword[this.nboftry][i] == this.wordinfos.arrayWord[i]) {
             allLettersTd[i].classList.add("bg-danger");
-            this.currentWordWithHints[i] = allLettersTd[i].textContent;
+            this.currentwordWithHints[i] = allLettersTd[i].textContent;
           } else {
-            this.currentWordWithHints[i] = ".";
+            this.currentwordWithHints[i] = ".";
           }
         // occurencence can't go under 0 
         if(this.letteroccurence[objIndex].occurence > 0) {
@@ -295,7 +304,7 @@ export default {
        }
       });
       this.letteroccurence = structuredClone(this.letteroccurencereset);
-      this.currentword = structuredClone(this.currentWordWithHints);
+      this.currentword[this.nboftry+1] = structuredClone(this.currentwordWithHints);
     },
     setOccurence() {
       // Count occurence letter in word to guess
@@ -317,10 +326,13 @@ export default {
 
     },
     resetCurrentWord() {
+      
+      for(let i in this.currentword) {
         // Generate an array thats equal the size of the word to guess
-      this.currentword = Array(this.wordinfos.size).fill(".");
+      this.currentword[i] = Array(this.wordinfos.size).fill(".");
       //  and put first letter
-      this.currentword[0] = this.wordinfos.firstLetter;
+      this.currentword[i][0] = this.wordinfos.firstLetter;
+      }
     }
   },
   mounted() {
@@ -329,14 +341,14 @@ export default {
     this.setOccurence();
 
     this.letteroccurencereset = structuredClone(this.letteroccurence);
-    this.currentWordWithHints= structuredClone(this.currentword);
+    this.currentwordWithHints= structuredClone(this.currentword[this.nboftry]);
 
     // console.table(this.letteroccurence);
   
 
   },
   beforeUpdate() {
-    console.table(this.wordinfos.word);
+    console.log(this.currentword);
   },
 
 
@@ -345,6 +357,8 @@ export default {
 
 </script>
 <style scoped>
+
+
 table {
   width:100%;
 }

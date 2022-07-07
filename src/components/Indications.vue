@@ -75,6 +75,7 @@ export default {
 
 <style scoped>
 #indications {
+  top:230px;
   position: absolute;
   left: 89px;
   height: 184px;

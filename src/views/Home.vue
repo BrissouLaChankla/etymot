@@ -1,6 +1,6 @@
 <template>
   <div class="home overflow-hidden p-3">
-    <a class="logo-home" href="#">
+    <a class="logo-home" href="https://nanagames.io">
       <img alt="logo" class="img-fluid text-start" src="../assets/logo.webp" />
     </a>
 
@@ -128,6 +128,7 @@ body {
 @media screen and (min-width: 640px) {
   .nana-longue-vue {
     max-width: 356px;
+    width: 28vw!important;
     bottom: -180px;
     left: 30px;
     transform: translateX(0);
