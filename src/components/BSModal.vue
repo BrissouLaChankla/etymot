@@ -11,9 +11,9 @@
       </div>
       <div class="modal-body">
         <div class="d-flex flex-column align-items-center">
-            <router-link :to="{ name: 'RandomWord',  params: { difficulty: 'easy' } }" class="text-decoration-none btn btn-primary my-3 px-5"> Facile </router-link>
-            <router-link :to="{ name: 'RandomWord',  params: { difficulty: 'medium' } }" class="text-decoration-none btn btn-primary my-3 px-5"> Moyen </router-link>
-            <router-link :to="{ name: 'RandomWord',  params: { difficulty: 'hard' } }" class="text-decoration-none btn btn-primary my-3 px-5"> Difficile </router-link>
+            <router-link :to="{ name: 'RandomWord',  params: { difficulty: '4' } }" class="text-decoration-none btn btn-primary my-3 px-5"> Facile </router-link>
+            <router-link :to="{ name: 'RandomWord',  params: { difficulty: '6' } }" class="text-decoration-none btn btn-primary my-3 px-5"> Moyen </router-link>
+            <router-link :to="{ name: 'RandomWord',  params: { difficulty: '8' } }" class="text-decoration-none btn btn-primary my-3 px-5"> Difficile </router-link>
         </div>
       </div>
     </div>

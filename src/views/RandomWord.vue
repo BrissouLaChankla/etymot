@@ -20,6 +20,7 @@
 <script>
 import ArrayGame from "@/components/ArrayGame.vue";
 import Indications from "@/components/Indications.vue";
+import removeAccents from 'remove-accents';
 
 export default {
   props:["difficulty"],
@@ -36,10 +37,10 @@ export default {
     };
   },
   async mounted() {
-    const response = await fetch("https://nanagames.io/api/get/"+this.difficulty+"/randomword");
+    const response = await fetch("https://trouve-mot.fr/api/size/"+this.difficulty);
       const data = await response.json();
       this.loading = false;
-      this.word = data.name;
+      this.word = removeAccents(data[0].name);
 
     if(document.querySelector('.modal-backdrop')) {
       document.querySelector('.modal-backdrop').remove();
@@ -49,7 +50,7 @@ export default {
     let arrayWord = Array.from(word);
     let firstLetter = arrayWord[0];
     let wordSize = arrayWord.length;
-    let wordTheme = data.theme;
+    let wordTheme = data[0].categorie;
 
     this.wordInfos = {
       word: word,
